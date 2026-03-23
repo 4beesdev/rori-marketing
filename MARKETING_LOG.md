@@ -106,3 +106,70 @@ Chronological log of all marketing actions, decisions, and results.
 - **Day 14**: If retarget audience > 1000, create Lookalike.
 - **Day 14**: If ROAS > 2x, consider increasing budget.
 - **Day 30**: Full review and strategy adjustment.
+
+---
+
+## 2026-03-23 — 30-Day Review & Campaign Optimization
+
+### Performance Analysis (21 Feb — 22 Mar)
+
+**Brand Awareness - Belgrade** (5€/day budget, €18.15 spent):
+| Ad | Impressions | Reach | Spend | Video Views | ThruPlays | CTR | CPM |
+|----|-------------|-------|-------|-------------|-----------|-----|-----|
+| @viviennesabo.serbia Cabaret | 22,234 | 18,547 | €12.87 | 7,823 | 3,499 | 0.22% | €0.58 |
+| VS - Olovka i ulje za usne | 4,035 | 3,836 | €2.89 | 2,291 | 632 | 0.62% | €0.72 |
+| @mamma.m.i.a Caudalie | 521 | 521 | €0.59 | 160 | 52 | 0.19% | €1.13 |
+| @lady_withhat Rori | 458 | 438 | €0.28 | 170 | 41 | 0.44% | €0.61 |
+| Caudalie - Kozmetika | 401 | 361 | €0.90 | 257 | 226 | 1.25% | €2.24 |
+| @la_reina_dulce VS | 383 | 371 | €0.43 | 206 | 94 | 0.78% | €1.12 |
+| ABH - Anastasia BH | 88 | 84 | €0.19 | 62 | 56 | 0% | €2.16 |
+
+**Catalog Retarget - Belgrade** (5€/day budget, €0.38 spent):
+- 56 impressions, 4 reach, 0 clicks — effectively dead.
+
+### Key Findings
+- VS Cabaret partnership consumed 71% of total budget and 79% of impressions — starving other ads.
+- Total spend €18.53 of possible ~€300 (6% utilization) — Meta under-delivering significantly.
+- Catalog Retarget failed because: optimization goal `OFFSITE_CONVERSIONS (PURCHASE)` requires conversion signals, but pixel has near-zero purchase events. Audience too small (~1,000 per audience). `Page Engagers 30d` audience flagged as too small for delivery (code 300).
+- Pixel volume much lower than expected: PageView ~10-20/day (not ~560/day as initially measured), ViewContent ~1-3/day.
+
+### Actions Taken
+
+**1. Paused @viviennesabo.serbia Cabaret ad** (ID: 120242238054790751)
+- Reason: consuming 79% of all impressions, starving other 6 ads.
+- Expected: remaining ads will get more even distribution.
+
+**2. Replaced Catalog Retarget adset**
+- **Paused**: old adset `Retarget Engagers - All Influencer Brands` (ID: 120242237747130751)
+  - Problem: `OFFSITE_CONVERSIONS (PURCHASE)` optimization with zero purchase signals = no delivery.
+- **Created**: new adset `Retarget Engagers - Link Clicks Optimized` (ID: 120242378319210751)
+  - Optimization: `LINK_CLICKS` — Meta finds people who will click, not wait for purchase signal.
+  - **Advantage Audience enabled** — Meta expands beyond custom audiences to similar users.
+  - Age range: 18-65 (required by Advantage Audience, Meta still favors 18-45 from seed audiences).
+  - Same audiences: IG Engagers 30d + All Brands Video Viewers 50%.
+  - Removed: Page Engagers 30d (too small, delivery_status 300).
+  - Same budget: 5€/day.
+- **Created**: new DPA ad `DPA Influencer Brands - Link Clicks` (ID: 120242378372620751)
+  - Same creative: 175 products (VS + Caudalie + ABH), SHOP_NOW CTA.
+
+**3. Meta API integrated into Rori admin panel**
+- Backend: `GET /meta/campaigns` endpoint on rori-core (branch: `newcore-marketing`).
+- Frontend: "Ads" tab added to `/materials` page (branch: `newfront-marketing`).
+- `META_ACCESS_TOKEN` and `META_AD_ACCOUNT_ID` added to GitHub Environment Secrets (dev) and deploy workflow.
+- Purpose: expose Meta token in server env for AI agent access + campaign visibility in admin panel.
+
+### Current Active State
+
+**Brand Awareness** (6 active ads, was 7):
+- @lady_withhat Rori, @mamma.m.i.a Caudalie, @la_reina_dulce VS (partnerships)
+- VS Olovka i ulje, Caudalie Kozmetika, ABH Anastasia BH (brand videos)
+- PAUSED: @viviennesabo.serbia Cabaret
+
+**Catalog Retarget** (1 active ad, new adset):
+- DPA Influencer Brands - Link Clicks (Advantage Audience enabled)
+
+### Next Steps
+- **Day 1-3**: Monitor new catalog retarget adset — expect significantly higher delivery.
+- **Day 7**: Check if awareness ads redistribute evenly without VS Cabaret.
+- Investigate low pixel volume — may need to verify pixel firing on rori.app production.
+- Consider creating website visitors custom audience when ToS is accepted in Meta Business Manager.
