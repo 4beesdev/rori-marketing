@@ -173,3 +173,70 @@ Chronological log of all marketing actions, decisions, and results.
 - **Day 7**: Check if awareness ads redistribute evenly without VS Cabaret.
 - Investigate low pixel volume — may need to verify pixel firing on rori.app production.
 - Consider creating website visitors custom audience when ToS is accepted in Meta Business Manager.
+
+---
+
+## 2026-03-29 — 10-Day Review & Ad Rotation
+
+### System User Token
+- Previous 60-day user token expired 2026-03-22.
+- Generated permanent System User token from Meta Business Manager — no more expiration.
+- Updated on dev server (`/opt/rori/.env.backend`) and locally.
+
+### full_analysis.py Fix
+- Script was reporting account-level metrics (all campaigns including 9 paused legacy ones) as if they were from active campaigns.
+- Fixed: all queries now filter `effective_status: ACTIVE` for ads, adsets. Demographics and placements scoped to active campaign IDs only. Time range uses campaign launch date (2026-03-19) instead of `last_30d`.
+
+### Performance Analysis (19-29 Mar, active elements only)
+
+**Brand Awareness** (€35.22 spent, 5€/day budget):
+| Ad | Spend | Impressions | Reach | ThruPlays | Cost/ThruPlay | Link Clicks |
+|----|-------|-------------|-------|-----------|---------------|-------------|
+| VS - Olovka i ulje | €31.23 | 44,568 | 33,172 | 6,746 | €0.0046 | 64 |
+| Caudalie - Kozmetika | €1.37 | 632 | 556 | 338 | €0.0041 | 4 |
+| @la_reina_dulce VS | €0.71 | 718 | 693 | 150 | €0.0047 | 1 |
+| ABH - Anastasia BH | €0.65 | 334 | 310 | 164 | €0.0040 | 3 |
+| @lady_withhat Rori | €0.63 | 846 | 795 | 108 | €0.0058 | 0 |
+| @mamma.m.i.a Caudalie | €0.63 | 568 | 568 | 56 | €0.0113 | 0 |
+
+**Problem**: VS Olovka consumed 88.7% of awareness budget (€31.23 of €35.22). Same dominance issue as Cabaret before.
+
+**Catalog Retarget** (€30.22 spent, 5€/day budget):
+| Ad | Spend | Impressions | Reach | Link Clicks | Landing Page Views | CTR | CPC |
+|----|-------|-------------|-------|-------------|-------------------|-----|-----|
+| DPA Link Clicks | €30.22 | 30,296 | 14,475 | 1,733 | 129 | 5.90% | €0.017 |
+
+Retarget performing excellently after switch to Link Clicks optimization. CTR trending upward (8.24% on day 10).
+
+**Total**: €65.44 spent / €100 possible = 65.4% budget utilization. €6.54/day average.
+
+### Actions Taken
+
+**1. Paused VS - Olovka i ulje** (ID: 120242237782670751)
+- Reason: consuming 89% of awareness budget, starving other 5 ads. Same pattern as Cabaret.
+- Has done its job: 44,568 impressions, 33,172 reach, 6,746 ThruPlays.
+
+**2. Added 2 new partnership ads**
+- **@milica_kontic92 Caudalie** (ad: 120242760580820751, creative: 2361342757703858) — Milica confirmed partnership, status changed from pending to active.
+- **@lady_withhat Rori 2** (ad: 120242760584160751, creative: 1631391638144652) — second reel from existing partner.
+
+**3. Failed: @bojana_tomic VS**
+- Error: "Instagram video must be uploaded to Facebook" → upload attempt returned "Video not visible" (error 222).
+- Root cause: Bojana's reel is not accessible for upload. She needs to enable "Allow business partner to promote" for this specific reel.
+- **Action needed**: contact Bojana to fix permissions on reel https://www.instagram.com/reel/DVEMkBsiJP3/
+
+### Current Active State
+
+**Brand Awareness** (7 active ads):
+- Caudalie - Kozmetika, ABH - Anastasia BH (brand videos)
+- @la_reina_dulce VS, @lady_withhat Rori, @lady_withhat Rori 2, @mamma.m.i.a Caudalie, @milica_kontic92 Caudalie (partnerships)
+- PAUSED: VS Olovka i ulje, @viviennesabo.serbia Cabaret
+
+**Catalog Retarget** (1 active ad, unchanged):
+- DPA Influencer Brands - Link Clicks
+
+### Next Steps
+- Contact @bojana_tomic to fix reel permissions, then add as partnership ad.
+- Monitor if awareness spend distributes evenly across 7 ads without VS Olovka.
+- Investigate zero purchase pixel events — no conversions tracked despite retarget sending 1,733 clicks to site.
+- Consider adding @katarina_munjic and @jovanaradovanovicmakeup reels.

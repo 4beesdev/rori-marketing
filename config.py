@@ -80,13 +80,17 @@ CAMPAIGNS = {
             "age_max": 45,
         },
         "ads": {
-            "vs_video": "120242237782670751",
             "caudalie_video": "120242237791110751",
             "abh_video": "120242237793050751",
             "partnership_la_reina_dulce": "120242238045460751",
             "partnership_lady_withhat": "120242238046370751",
+            "partnership_lady_withhat_2": "120242760584160751",  # Added 2026-03-29
             "partnership_mamma_mia": "120242238050250751",
-            "partnership_viviennesabo_cabaret": "120242238054790751",
+            "partnership_milica_kontic92": "120242760580820751",  # Added 2026-03-29
+        },
+        "ads_paused": {
+            "vs_video": "120242237782670751",  # Paused 2026-03-29 — dominated 89% of budget
+            "partnership_viviennesabo_cabaret": "120242238054790751",  # Paused 2026-03-23 — dominated 79% of budget
         },
     },
     "catalog_retarget": {
@@ -128,7 +132,7 @@ INFLUENCER_PARTNERS = {
     "bojana_tomic": {"ig_id": "17841401348071880", "status": "active", "brands": ["VS"]},
     "lady_withhat": {"ig_id": "17841401649992701", "status": "active", "brands": ["Rori"]},
     "viviennesabo_serbia": {"ig_id": "17841476798155747", "status": "active", "brands": ["VS"]},
-    "milica_kontic92": {"ig_id": "17841402094180677", "status": "pending", "brands": ["Caudalie"]},
+    "milica_kontic92": {"ig_id": "17841402094180677", "status": "active", "brands": ["Caudalie"]},
     "mamma_mia": {"ig_id": "17841401878813194", "status": "active", "brands": ["Caudalie"]},
     "jovanaradovanovicmakeup": {"ig_id": "17841403156811935", "status": "active", "brands": ["VS"]},
 }
