@@ -94,15 +94,16 @@ CAMPAIGNS = {
         "name": "Rori Catalog Retarget - Belgrade",
         "objective": "OUTCOME_SALES",
         "daily_budget_cents": 500,
-        "adset_id": "120242237747130751",
+        "adset_id": "120242378319210751",  # New adset (Link Clicks, Advantage Audience) — created 2026-03-23
+        "adset_id_old_paused": "120242237747130751",  # Old adset (Purchase optimization) — paused 2026-03-23
         "product_set": "influencer_brands",
         "retarget_audiences": [
             "all_brands_video_viewers_50pct",
             "ig_engagers_30d",
-            "page_engagers_30d",
         ],
         "ads": {
-            "dpa_influencer_brands": "120242237797140751",
+            "dpa_link_clicks": "120242378372620751",  # Active — created 2026-03-23
+            "dpa_influencer_brands_old_paused": "120242237797140751",  # Paused — old Purchase optimization ad
         },
     },
 }
